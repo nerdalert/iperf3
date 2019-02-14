@@ -18,7 +18,7 @@ Start a listener service on port 5201 and name the container "iperf3-server":
 docker run  -it --rm --name=iperf3-server -p 5201:5201 networkstatic/iperf3 -s
 ```
 
-That returns an iperf3 process bound to a soccer waiting for new connections:
+That returns an iperf3 process bound to a socket waiting for new connections:
 
 ```
 -----------------------------------------------------------
@@ -28,7 +28,7 @@ Server listening on 5201
 
 #### Iperf3 Client SIde
 
-First, get the IP address of the new server container ypu just started:
+First, get the IP address of the new server container you just started:
 
 ```
 docker inspect --format "{{ .NetworkSettings.IPAddress }}" iperf3-server
