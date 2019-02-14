@@ -26,7 +26,7 @@ Server listening on 5201
 -----------------------------------------------------------
 ```
 
-#### Iperf3 Client SIde
+#### Iperf3 Client Side
 
 First, get the IP address of the new server container you just started:
 
