@@ -1,0 +1,21 @@
+name: iPerf3 image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * *'  # every day at midnight
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the iperf3 image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)

@@ -1,7 +1,9 @@
 
 # iperf3
 
-[![Iperf3 Image CI](https://github.com/nerdalert/iperf3/actions/workflows/docker-image.yml/badge.svg)](https://github.com/nerdalert/iperf3/actions/workflows/docker-image.yml)
+[![iPerf3 image CI](https://github.com/nerdalert/iperf3/actions/workflows/build-image.yml/badge.svg)](https://github.com/nerdalert/iperf3/actions/workflows/build-image.yml)
+
+
 
 ###  IPerf3 Docker Build for Network Performance and Bandwidth Testing
 
