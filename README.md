@@ -100,5 +100,18 @@ Connecting to host 172.17.0.193, port 5201
 
 iperf Done.
 ```
+#### Iperf3 Client Side
+
+You can use a public iperf3 server to measure your Internet speed
+
+```
+docker run  -it --rm networkstatic/iperf3  -c ams.speedtest.clouvider.net -p 5208  -R -P15
+```
+The downstream speed is in the last line:
+
+```commandline
+[SUM]   0.00-10.00  sec  2.72 GBytes  2.34 Gbits/sec                  receiver
+```
+So in this case: 2.34 Gbits/sec
 
 Thanks to ESNET for re-rolling iperf from the ground up. It is a killer piece of software.
