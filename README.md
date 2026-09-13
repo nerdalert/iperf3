@@ -134,3 +134,20 @@ The workflow also has a monthly publishing job through this GitHub Actions cron 
 ```
 
 That schedule runs at 00:00 UTC on the first day of every month. It rebuilds both architectures and publishes the resulting manifest to the `latest` tag. The scheduled run is independent of source changes, so it provides a regular refresh of the published image using the current repository state.
+
+### Docker Compose
+
+To run an iperf3 server as a long-running Docker Compose service, use:
+
+```yaml
+version: "3"
+services:
+  iperf3:
+    image: networkstatic/iperf3:latest
+    restart: always
+    ports:
+      - "5201:5201"
+    command: -s
+```
+
+Start it with `docker compose up -d`. The server listens on TCP port `5201` and can be stopped with `docker compose down`.
