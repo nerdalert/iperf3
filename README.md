@@ -115,3 +115,22 @@ The downstream speed is in the last line:
 So in this case: 2.34 Gbits/sec
 
 Thanks to ESNET for re-rolling iperf from the ground up. It is a killer piece of software.
+
+## Image build, multi-architecture, and monthly publishing
+
+The image automation is defined in [`.github/workflows/build-image.yml`](.github/workflows/build-image.yml) as the **iPerf3 image CI** workflow. It runs when code is pushed to `master`, for pull requests targeting `master`, on demand through the GitHub Actions **Run workflow** button, and on the monthly schedule described below.
+
+Each run checks out the repository on an `ubuntu-latest` runner, enables QEMU for cross-platform builds, and configures Docker Buildx. The Dockerfile in the repository root is used as the build context. Buildx produces a multi-architecture image for:
+
+- `linux/amd64`
+- `linux/arm64`
+
+For events other than pull requests, the workflow logs in to Docker Hub with the `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` repository secrets and publishes the image as [`networkstatic/iperf3:latest`](https://hub.docker.com/r/networkstatic/iperf3). Pull-request runs still build both architectures, but do not log in or push an image.
+
+The workflow also has a monthly publishing job through this GitHub Actions cron schedule:
+
+```text
+0 0 1 * *
+```
+
+That schedule runs at 00:00 UTC on the first day of every month. It rebuilds both architectures and publishes the resulting manifest to the `latest` tag. The scheduled run is independent of source changes, so it provides a regular refresh of the published image using the current repository state.
