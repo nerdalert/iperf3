@@ -3,38 +3,9 @@
 
 [![iPerf3 image CI](https://github.com/nerdalert/iperf3/actions/workflows/build-image.yml/badge.svg)](https://github.com/nerdalert/iperf3/actions/workflows/build-image.yml)
 
+### IPerf3 Docker Build for Network Performance and Bandwidth Testing
 
-
-### Podman/Docker Compose
-
-The same Compose file works with both Podman and Docker. To run an iperf3
-server as a long-running Compose service, use:
-
-```yaml
-version: "3"
-services:
-  iperf3:
-    image: networkstatic/iperf3:latest
-    restart: always
-    ports:
-      - "5201:5201"
-    command: -s
-```
-
-Start it with Docker Compose:
-
-```console
-docker compose up -d
-```
-
-Or with Podman Compose:
-
-```console
-podman compose up -d
-```
-
-The server listens on TCP port `5201` and can be stopped with the matching
-`compose down` command.
+Image on Docker Hub [hub.docker.com/r/networkstatic/iperf3/](https://hub.docker.com/r/networkstatic/iperf3/)
 
 ### Run 
 
@@ -141,9 +112,36 @@ The downstream speed is in the last line:
 ```
 So in this case: 2.34 Gbits/sec
 
-### IPerf3 Docker Build for Network Performance and Bandwidth Testing
+### Podman/Docker Compose
 
-Image on Docker Hub [hub.docker.com/r/networkstatic/iperf3/](https://hub.docker.com/r/networkstatic/iperf3/)
+The same Compose file works with both Podman and Docker. To run an iperf3
+server as a long-running Compose service, use:
+
+```yaml
+version: "3"
+services:
+  iperf3:
+    image: networkstatic/iperf3:latest
+    restart: always
+    ports:
+      - "5201:5201"
+    command: -s
+```
+
+Start it with Docker Compose:
+
+```console
+docker compose up -d
+```
+
+Or with Podman Compose:
+
+```console
+podman compose up -d
+```
+
+The server listens on TCP port `5201` and can be stopped with the matching
+`compose down` command.
 
 ## Image build, multi-architecture, and monthly publishing
 
