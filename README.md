@@ -9,6 +9,37 @@
 
 Image on Docker Hub [hub.docker.com/r/networkstatic/iperf3/](https://hub.docker.com/r/networkstatic/iperf3/)
 
+### Podman/Docker Compose
+
+The same Compose file works with both Podman and Docker. To run an iperf3
+server as a long-running Compose service, use:
+
+```yaml
+version: "3"
+services:
+  iperf3:
+    image: networkstatic/iperf3:latest
+    restart: always
+    ports:
+      - "5201:5201"
+    command: -s
+```
+
+Start it with Docker Compose:
+
+```console
+docker compose up -d
+```
+
+Or with Podman Compose:
+
+```console
+podman compose up -d
+```
+
+The server listens on TCP port `5201` and can be stopped with the matching
+`compose down` command.
+
 ### Run 
 
 `docker run -it --rm -p 5201:5201 networkstatic/iperf3 --help`
@@ -114,8 +145,6 @@ The downstream speed is in the last line:
 ```
 So in this case: 2.34 Gbits/sec
 
-Thanks to ESNET for re-rolling iperf from the ground up. It is a killer piece of software.
-
 ## Image build, multi-architecture, and monthly publishing
 
 The image automation is defined in [`.github/workflows/build-image.yml`](.github/workflows/build-image.yml) as the **iPerf3 image CI** workflow. It runs when code is pushed to `master`, for pull requests targeting `master`, on demand through the GitHub Actions **Run workflow** button, and on the monthly schedule described below.
@@ -135,19 +164,4 @@ The workflow also has a monthly publishing job through this GitHub Actions cron 
 
 That schedule runs at 00:00 UTC on the first day of every month. It rebuilds both architectures and publishes the resulting manifest to the `latest` tag. The scheduled run is independent of source changes, so it provides a regular refresh of the published image using the current repository state.
 
-### Docker Compose
-
-To run an iperf3 server as a long-running Docker Compose service, use:
-
-```yaml
-version: "3"
-services:
-  iperf3:
-    image: networkstatic/iperf3:latest
-    restart: always
-    ports:
-      - "5201:5201"
-    command: -s
-```
-
-Start it with `docker compose up -d`. The server listens on TCP port `5201` and can be stopped with `docker compose down`.
+Thanks to ESNET for re-rolling iperf from the ground up. It is an essential tool for NetOps.
