@@ -5,10 +5,6 @@
 
 
 
-###  IPerf3 Docker Build for Network Performance and Bandwidth Testing
-
-Image on Docker Hub [hub.docker.com/r/networkstatic/iperf3/](https://hub.docker.com/r/networkstatic/iperf3/)
-
 ### Podman/Docker Compose
 
 The same Compose file works with both Podman and Docker. To run an iperf3
@@ -144,6 +140,10 @@ The downstream speed is in the last line:
 [SUM]   0.00-10.00  sec  2.72 GBytes  2.34 Gbits/sec                  receiver
 ```
 So in this case: 2.34 Gbits/sec
+
+### IPerf3 Docker Build for Network Performance and Bandwidth Testing
+
+Image on Docker Hub [hub.docker.com/r/networkstatic/iperf3/](https://hub.docker.com/r/networkstatic/iperf3/)
 
 ## Image build, multi-architecture, and monthly publishing
 
